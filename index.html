@@ -1,0 +1,135 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slask Pinball Madness - Flail or Fail!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header / Hero Section -->
+    <header class="hero-bg py-16 text-center">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-bounce">SLASK PINBALL MADNESS</h1>
+            <p class="text-2xl md:text-3xl mb-6">WHERE FLAILING IS THE ONLY WAY TO PLAY! CONTROL? WHAT'S THAT? 😂🤪</p>
+            <a href="#about" class="bg-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-pink-500 transition">DIVE INTO THE CHAOS</a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-red-800 py-4 sticky top-0 shadow-md">
+        <div class="container mx-auto px-4 flex justify-center space-x-8">
+            <a href="index.html" class="hover:text-yellow-300 transition uppercase">Home lol</a>
+            <a href="#about" class="hover:text-yellow-300 transition uppercase">About (kinda)</a>
+            <a href="#contact" class="hover:text-yellow-300 transition uppercase">Contact? Why?</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- About Section -->
+        <section id="about" class="mb-12">
+            <h2 class="text-4xl font-bold mb-6 text-center text-yellow-400">ABOUT SLASK PINBALL - FLAIL LIKE A PRO</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-400">OUR STORY (OR WHATEVER)</h3>
+                    <p class="text-lg">Yo, welcome to Slask Pinball where we shitpost about pinball all day! Forget those noobs who try to "control" the ball with skillz. FLAILING IS KING! Just smash those flippers like a madman and watch the points rack up... or not. Who cares? Anti-control is the best playstyle cuz it's pure chaos. 🤣 Ball drains? That's just the game trolling you back!</p>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2x4N2o2Yzl3ZGJrdmFmdmpxNGx3Z3l5c2hqc3V2N3B6dW1rdjdneCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KcVeuV5wsN8g0/giphy.gif" alt="Chaotic pinball machine" class="mt-4 rounded mx-auto">
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-400">WHY ANTI-CONTROL RULES</h3>
+                    <p class="text-lg">Control is for losers who read manuals. Real legends FLAIL WILDLY and let the pinball gods decide. Pro tip: Scream at the machine while flailing for extra points (in your head). Here's a gif of pure flail energy:</p>
+                    <img src="https://media.giphy.com/media/3orieS4jfLVzpdoxz2/giphy.gif" alt="Kermit flailing" class="mt-4 rounded mx-auto">
+                    <p class="mt-4">See? That's you playing pinball. Epic win! 🚀</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <h3 class="text-3xl font-bold text-red-400">RANDOM TROLL GIF TO DISTRACT YOU</h3>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3ZtcW9rb2xpdmRrcW03M3R2cTl1OWI0c2Y2M2N0aDh5d3Nud3p4cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Mb3v9d1E3jfLmlO/giphy.gif" alt="Troll face laughing" class="rounded mx-auto">
+                <p>LOL gotcha! Now back to flailing.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="mb-12">
+            <h2 class="text-4xl font-bold mb-6 text-center text-yellow-400">CONTACT US? OR NAH</h2>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-md max-w-lg mx-auto">
+                <p class="text-lg mb-4">Wanna rant about how flailing saved your pinball life? Or complain about control freaks? Hit us up, but we might just reply with memes.</p>
+                <p class="text-lg"><strong>Email:</strong> flailmaster@slask.life 😎</p>
+                <p class="text-lg"><strong>Phone:</strong> 1-800-FLAIL-NOW (jk, we don't answer)</p>
+                <a href="mailto:flailmaster@slask.life" class="inline-block mt-4 bg-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-red-600 transition">SEND MEMES</a>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3V2cW4zOHBnc2U3MzhrcTNsbmNmc3N1bDh2N3k3YzJwd2U4a2t2MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12U9iXHmANiT7W/giphy.gif" alt="Flailing arms panic" class="mt-4 rounded mx-auto">
+            </div>
+        </section>
+
+        <!-- Extra Troll Section -->
+        <section class="mb-12 text-center">
+            <h2 class="text-4xl font-bold mb-6 text-purple-400">MORE CHAOS GIFS CUZ WHY NOT</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3Q2a3Z2cWkya3M3c2VqYzR3aW1yc2NubTR2M2dla2F4Y3N0c2I4diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKs1VJcoVvF7R4I/giphy.gif" alt="Pinball chaos" class="rounded">
+                <img src="https://media.giphy.com/media/3orieS4jfLVzpdoxz2/giphy.gif" alt="Kermit flailing" class="rounded">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnF3b3B0d3RkbTdxeG1uejB3c3J1YzR0Ymxoc3J5cjd2aDR2cTVxMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6ZsYTS4p8Y6o9O2s/giphy.gif" alt="Troll dance" class="rounded">
+            </div>
+            <p class="mt-4 text-xl">Flail on, legends! Anti-control forever! 💀🔥</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-red-900 py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Slask Pinball. All rights reversed. Flail responsibly... or not. ¯\_(ツ)_/¯</p>
+            <div class="mt-4">
+                <a href="#about" class="text-yellow-300 hover:text-white mx-2">About</a>
+                <a href="#contact" class="text-yellow-300 hover:text-white mx-2">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
