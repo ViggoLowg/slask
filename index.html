@@ -31,7 +31,7 @@ function getNextType(currentType) {
 }
 
 async function fetchRandomGif(tag) {
-    const API_KEY = 'YOUR_GIPHY_API_KEY'; // Replace with your Giphy key
+    const API_KEY = 'yNuubkxz41Z1F3JD9L6AfQqwCTVnM6e9'; // Replace with your Giphy key
     try {
         const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}&tag=${tag}&rating=pg-13`);
         const data = await response.json();
