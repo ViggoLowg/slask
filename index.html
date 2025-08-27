@@ -15,7 +15,7 @@
                 // Convert sheet to JSON to filter blank rows
                 var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
                 // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
+                var profilteredData = jsonData.filter(row => row.some(filledCell));
 
                 // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                 var headerRowIndex = filteredData.findIndex((row, index) =>
@@ -37,21 +37,15 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><!DOCTYPE html>
+</script>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slask Pinball Madness - Flail or Fail!</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-        .hero-bg {
-            background: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="bg-black text-white">
     <!-- Header / Hero Section -->
@@ -81,18 +75,18 @@
                 <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold mb-4 text-green-400">OUR STORY (OR WHATEVER)</h3>
                     <p class="text-lg">Yo, welcome to Slask Pinball where we shitpost about pinball all day! Forget those noobs who try to "control" the ball with skillz. FLAILING IS KING! Just smash those flippers like a madman and watch the points rack up... or not. Who cares? Anti-control is the best playstyle cuz it's pure chaos. 🤣 Ball drains? That's just the game trolling you back!</p>
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2x4N2o2Yzl3ZGJrdmFmdmpxNGx3Z3l5c2hqc3V2N3B6dW1rdjdneCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KcVeuV5wsN8g0/giphy.gif" alt="Chaotic pinball machine" class="mt-4 rounded mx-auto">
+                    <img src="https://media.tenor.com/0LhH2W2aY1AAAAAC/pinball-machine.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy pinball chaos" class="mt-4 rounded mx-auto">
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold mb-4 text-green-400">WHY ANTI-CONTROL RULES</h3>
                     <p class="text-lg">Control is for losers who read manuals. Real legends FLAIL WILDLY and let the pinball gods decide. Pro tip: Scream at the machine while flailing for extra points (in your head). Here's a gif of pure flail energy:</p>
-                    <img src="https://media.giphy.com/media/3orieS4jfLVzpdoxz2/giphy.gif" alt="Kermit flailing" class="mt-4 rounded mx-auto">
+                    <img src="https://media.tenor.com/8z3I9ZQ6j8QAAAAd/kermit-flail.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy Kermit flailing" class="mt-4 rounded mx-auto">
                     <p class="mt-4">See? That's you playing pinball. Epic win! 🚀</p>
                 </div>
             </div>
             <div class="text-center mt-8">
                 <h3 class="text-3xl font-bold text-red-400">RANDOM TROLL GIF TO DISTRACT YOU</h3>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3ZtcW9rb2xpdmRrcW03M3R2cTl1OWI0c2Y2M2N0aDh5d3Nud3p4cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Mb3v9d1E3jfLmlO/giphy.gif" alt="Troll face laughing" class="rounded mx-auto">
+                <img src="https://media.tenor.com/7y8Z28jM4kQAAAAd/troll-face.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy troll face" class="rounded mx-auto">
                 <p>LOL gotcha! Now back to flailing.</p>
             </div>
         </section>
@@ -105,7 +99,7 @@
                 <p class="text-lg"><strong>Email:</strong> flailmaster@slask.life 😎</p>
                 <p class="text-lg"><strong>Phone:</strong> 1-800-FLAIL-NOW (jk, we don't answer)</p>
                 <a href="mailto:flailmaster@slask.life" class="inline-block mt-4 bg-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-red-600 transition">SEND MEMES</a>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3V2cW4zOHBnc2U3MzhrcTNsbmNmc3N1bDh2N3k3YzJwd2U4a2t2MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12U9iXHmANiT7W/giphy.gif" alt="Flailing arms panic" class="mt-4 rounded mx-auto">
+                <img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-47-750_512.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy dancing character" class="mt-4 rounded mx-auto">
             </div>
         </section>
 
@@ -113,9 +107,9 @@
         <section class="mb-12 text-center">
             <h2 class="text-4xl font-bold mb-6 text-purple-400">MORE CHAOS GIFS CUZ WHY NOT</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3Q2a3Z2cWkya3M3c2VqYzR3aW1yc2NubTR2M2dla2F4Y3N0c2I4diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKs1VJcoVvF7R4I/giphy.gif" alt="Pinball chaos" class="rounded">
-                <img src="https://media.giphy.com/media/3orieS4jfLVzpdoxz2/giphy.gif" alt="Kermit flailing" class="rounded">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnF3b3B0d3RkbTdxeG1uejB3c3J1YzR0Ymxoc3J5cjd2aDR2cTVxMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6ZsYTS4p8Y6o9O2s/giphy.gif" alt="Troll dance" class="rounded">
+                <img src="https://cdn.pixabay.com/animation/2023/10/08/03/25/03-25-27-498_512.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy cartoon explosion" class="rounded">
+                <img src="https://media.tenor.com/8z3I9ZQ6j8QAAAAd/kermit-flail.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy Kermit flailing" class="rounded">
+                <img src="https://cdn.pixabay.com/animation/2023/10/08/03/18/03-18-26-213_512.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy cartoon dance" class="rounded">
             </div>
             <p class="mt-4 text-xl">Flail on, legends! Anti-control forever! 💀🔥</p>
         </section>
