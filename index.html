@@ -15,7 +15,7 @@
                 // Convert sheet to JSON to filter blank rows
                 var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
                 // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var profilteredData = jsonData.filter(row => row.some(filledCell));
+                var filteredData = jsonData.filter(row => row.some(filledCell));
 
                 // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                 var headerRowIndex = filteredData.findIndex((row, index) =>
@@ -37,6 +37,45 @@
         }
         return gk_fileData[filename] || "";
         }
+
+        // Giphy API integration for random goofy GIFs
+        const GIPHY_API_KEY = 'YOUR_GIPHY_API_KEY'; // Replace with your Giphy API key
+        const GIF_TAGS = ['goofy', 'weird', 'chaos', 'troll', 'pinball'];
+        const GIF_IDS = ['gif-story', 'gif-flail', 'gif-troll', 'gif-contact', 'gif-chaos1', 'gif-chaos2', 'gif-chaos3'];
+
+        async function fetchRandomGif(tag) {
+            try {
+                const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_API_KEY}&tag=${tag}&rating=pg-13`);
+                const data = await response.json();
+                if (data.data && data.data.images && data.data.images.original) {
+                    return data.data.images.original.url;
+                } else {
+                    console.error('No valid GIF found for tag:', tag);
+                    return 'assets/fallback-goofy.gif';
+                }
+            } catch (error) {
+                console.error('Error fetching GIF:', error);
+                return 'assets/fallback-goofy.gif';
+            }
+        }
+
+        async function loadGifs() {
+            for (let i = 0; i < GIF_IDS.length; i++) {
+                const gifId = GIF_IDS[i];
+                const tag = GIF_TAGS[i % GIF_TAGS.length]; // Cycle through tags
+                const gifUrl = await fetchRandomGif(tag);
+                const imgElement = document.getElementById(gifId);
+                if (imgElement) {
+                    imgElement.src = gifUrl;
+                }
+            }
+        }
+
+        // Load GIFs on page load
+        document.addEventListener('DOMContentLoaded', loadGifs);
+
+        // Refresh GIFs every 10 seconds
+        setInterval(loadGifs, 10000);
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,18 +114,18 @@
                 <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold mb-4 text-green-400">OUR STORY (OR WHATEVER)</h3>
                     <p class="text-lg">Yo, welcome to Slask Pinball where we shitpost about pinball all day! Forget those noobs who try to "control" the ball with skillz. FLAILING IS KING! Just smash those flippers like a madman and watch the points rack up... or not. Who cares? Anti-control is the best playstyle cuz it's pure chaos. 🤣 Ball drains? That's just the game trolling you back!</p>
-                    <img src="https://media.tenor.com/0LhH2W2aY1AAAAAC/pinball-machine.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy pinball chaos" class="mt-4 rounded mx-auto">
+                    <img id="gif-story" src="assets/fallback-goofy.gif" alt="Goofy pinball chaos" class="mt-4 rounded mx-auto">
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold mb-4 text-green-400">WHY ANTI-CONTROL RULES</h3>
                     <p class="text-lg">Control is for losers who read manuals. Real legends FLAIL WILDLY and let the pinball gods decide. Pro tip: Scream at the machine while flailing for extra points (in your head). Here's a gif of pure flail energy:</p>
-                    <img src="https://media.tenor.com/8z3I9ZQ6j8QAAAAd/kermit-flail.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy Kermit flailing" class="mt-4 rounded mx-auto">
+                    <img id="gif-flail" src="assets/fallback-goofy.gif" alt="Goofy flailing chaos" class="mt-4 rounded mx-auto">
                     <p class="mt-4">See? That's you playing pinball. Epic win! 🚀</p>
                 </div>
             </div>
             <div class="text-center mt-8">
                 <h3 class="text-3xl font-bold text-red-400">RANDOM TROLL GIF TO DISTRACT YOU</h3>
-                <img src="https://media.tenor.com/7y8Z28jM4kQAAAAd/troll-face.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy troll face" class="rounded mx-auto">
+                <img id="gif-troll" src="assets/fallback-goofy.gif" alt="Goofy troll chaos" class="rounded mx-auto">
                 <p>LOL gotcha! Now back to flailing.</p>
             </div>
         </section>
@@ -99,7 +138,7 @@
                 <p class="text-lg"><strong>Email:</strong> flailmaster@slask.life 😎</p>
                 <p class="text-lg"><strong>Phone:</strong> 1-800-FLAIL-NOW (jk, we don't answer)</p>
                 <a href="mailto:flailmaster@slask.life" class="inline-block mt-4 bg-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-red-600 transition">SEND MEMES</a>
-                <img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-47-750_512.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy dancing character" class="mt-4 rounded mx-auto">
+                <img id="gif-contact" src="assets/fallback-goofy.gif" alt="Goofy flailing chaos" class="mt-4 rounded mx-auto">
             </div>
         </section>
 
@@ -107,9 +146,9 @@
         <section class="mb-12 text-center">
             <h2 class="text-4xl font-bold mb-6 text-purple-400">MORE CHAOS GIFS CUZ WHY NOT</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <img src="https://cdn.pixabay.com/animation/2023/10/08/03/25/03-25-27-498_512.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy cartoon explosion" class="rounded">
-                <img src="https://media.tenor.com/8z3I9ZQ6j8QAAAAd/kermit-flail.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy Kermit flailing" class="rounded">
-                <img src="https://cdn.pixabay.com/animation/2023/10/08/03/18/03-18-26-213_512.gif" onerror="this.src='assets/fallback-goofy.gif'" alt="Goofy cartoon dance" class="rounded">
+                <img id="gif-chaos1" src="assets/fallback-goofy.gif" alt="Goofy cartoon chaos" class="rounded">
+                <img id="gif-chaos2" src="assets/fallback-goofy.gif" alt="Goofy flailing chaos" class="rounded">
+                <img id="gif-chaos3" src="assets/fallback-goofy.gif" alt="Goofy dance chaos" class="rounded">
             </div>
             <p class="mt-4 text-xl">Flail on, legends! Anti-control forever! 💀🔥</p>
         </section>
