@@ -1,131 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slask Pinball Madness - Flail or Fail!</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body class="bg-black text-white">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slask Pinball Infinite Chaos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+const texts = [
+    "Flippers gone wild! 🤪",
+    "Pinball chaos intensifies! 💀",
+    "You have entered the flail zone! 🔥",
+    "Balls are everywhere, points are meaningless! 😂",
+    "Anti-control activated! Scream at the machine! 🚀",
+    "Epic flail energy detected! High score imaginary! 😎",
+    "Chaos gods are pleased! Another flail! 😈",
+    "Legends flail. Mortals lose. 🤯",
+    "TOTAL CHAOS! Everything is nonsense! 💥"
+];
 
-<!-- Header / Hero Section -->
-<header class="hero-bg py-16 text-center">
-    <div class="container mx-auto px-4">
-        <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-bounce">SLASK PINBALL MADNESS</h1>
-        <p class="text-2xl md:text-3xl mb-6">WHERE FLAILING IS THE ONLY WAY TO PLAY! CONTROL? WHAT'S THAT? 😂🤪</p>
-        <a href="#about" class="bg-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-pink-500 transition">DIVE INTO THE CHAOS</a>
-    </div>
-</header>
+const gifTags = ['chaos','flail','pinball','troll','goofy'];
 
-<!-- Navigation -->
-<nav class="bg-red-800 py-4 sticky top-0 shadow-md">
-    <div class="container mx-auto px-4 flex justify-center space-x-8">
-        <a href="index.html" class="hover:text-yellow-300 transition uppercase">Home lol</a>
-        <a href="#about" class="hover:text-yellow-300 transition uppercase">About (kinda)</a>
-        <a href="#contact" class="hover:text-yellow-300 transition uppercase">Contact? Why?</a>
-    </div>
-</nav>
+function getRandomText(seed) {
+    const index = parseInt(seed.replace(/\D/g,'')) % texts.length;
+    return texts[index] || texts[Math.floor(Math.random() * texts.length)];
+}
 
-<!-- Main Content -->
-<main class="container mx-auto px-4 py-12">
+function getNextType(currentType) {
+    const num = parseInt(currentType.replace(/\D/g,'')) || 0;
+    return 'type' + (num + 1);
+}
 
-    <!-- About Section -->
-    <section id="about" class="mb-12">
-        <h2 class="text-4xl font-bold mb-6 text-center text-yellow-400">ABOUT SLASK PINBALL - FLAIL LIKE A PRO</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-                <h3 class="text-2xl font-semibold mb-4 text-green-400">OUR STORY (OR WHATEVER)</h3>
-                <p class="text-lg">Yo, welcome to Slask Pinball where we shitpost about pinball all day! Forget those noobs who try to "control" the ball with skillz. FLAILING IS KING! Just smash those flippers like a madman and watch the points rack up... or not. Who cares? Anti-control is the best playstyle cuz it's pure chaos. 🤣 Ball drains? That's just the game trolling you back!</p>
-                <img id="gif-story" src="assets/fallback-goofy.gif" alt="Goofy pinball chaos" class="mt-4 rounded mx-auto">
-            </div>
-            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-                <h3 class="text-2xl font-semibold mb-4 text-green-400">WHY ANTI-CONTROL RULES</h3>
-                <p class="text-lg">Control is for losers who read manuals. Real legends FLAIL WILDLY and let the pinball gods decide. Pro tip: Scream at the machine while flailing for extra points (in your head). Here's a gif of pure flail energy:</p>
-                <img id="gif-flail" src="assets/fallback-goofy.gif" alt="Goofy flailing chaos" class="mt-4 rounded mx-auto">
-                <p class="mt-4">See? That's you playing pinball. Epic win! 🚀</p>
-            </div>
-        </div>
-        <div class="text-center mt-8">
-            <h3 class="text-3xl font-bold text-red-400">RANDOM TROLL GIF TO DISTRACT YOU</h3>
-            <img id="gif-troll" src="assets/fallback-goofy.gif" alt="Goofy troll chaos" class="rounded mx-auto">
-            <p>LOL gotcha! Now back to flailing.</p>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="mb-12">
-        <h2 class="text-4xl font-bold mb-6 text-center text-yellow-400">CONTACT US? OR NAH</h2>
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md max-w-lg mx-auto">
-            <p class="text-lg mb-4">Wanna rant about how flailing saved your pinball life? Or complain about control freaks? Hit us up, but we might just reply with memes.</p>
-            <p class="text-lg"><strong>Email:</strong> flailmaster@slask.life 😎</p>
-            <p class="text-lg"><strong>Phone:</strong> 1-800-FLAIL-NOW (jk, we don't answer)</p>
-            <a href="mailto:flailmaster@slask.life" class="inline-block mt-4 bg-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-red-600 transition">SEND MEMES</a>
-            <img id="gif-contact" src="assets/fallback-goofy.gif" alt="Goofy flailing chaos" class="mt-4 rounded mx-auto">
-        </div>
-    </section>
-
-    <!-- Extra Troll Section -->
-    <section class="mb-12 text-center">
-        <h2 class="text-4xl font-bold mb-6 text-purple-400">MORE CHAOS GIFS CUZ WHY NOT</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <img id="gif-chaos1" src="assets/fallback-goofy.gif" alt="Goofy cartoon chaos" class="rounded">
-            <img id="gif-chaos2" src="assets/fallback-goofy.gif" alt="Goofy flailing chaos" class="rounded">
-            <img id="gif-chaos3" src="assets/fallback-goofy.gif" alt="Goofy dance chaos" class="rounded">
-        </div>
-        <p class="mt-4 text-xl">Flail on, legends! Anti-control forever! 💀🔥</p>
-    </section>
-
-</main>
-
-<!-- Footer -->
-<footer class="bg-red-900 py-6">
-    <div class="container mx-auto px-4 text-center">
-        <p>&copy; 2025 Slask Pinball. All rights reversed. Flail responsibly... or not. ¯\_(ツ)_/¯</p>
-        <div class="mt-4">
-            <a href="#about" class="text-yellow-300 hover:text-white mx-2">About</a>
-            <a href="#contact" class="text-yellow-300 hover:text-white mx-2">Contact</a>
-        </div>
-    </div>
-</footer>
-
-<!-- Corrected Giphy JavaScript -->
-<script type="text/javascript">
-    const GIPHY_API_KEY = 'yNuubkxz41Z1F3JD9L6AfQqwCTVnM6e9'; // Sätt din riktiga Giphy API-nyckel här
-    const GIF_TAGS = ['goofy', 'weird', 'chaos', 'troll', 'pinball'];
-    const GIF_IDS = ['gif-story', 'gif-flail', 'gif-troll', 'gif-contact', 'gif-chaos1', 'gif-chaos2', 'gif-chaos3'];
-
-    async function fetchRandomGif(tag) {
-        try {
-            const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_API_KEY}&tag=${tag}&rating=pg-13`);
-            const data = await response.json();
-            if (data.data && data.data.images && data.data.images.original) {
-                return data.data.images.original.url;
-            } else {
-                console.warn('No valid GIF found for tag:', tag);
-                return 'assets/fallback-goofy.gif';
-            }
-        } catch (error) {
-            console.error('Error fetching GIF:', error);
-            return 'assets/fallback-goofy.gif';
+async function fetchRandomGif(tag) {
+    const API_KEY = 'YOUR_GIPHY_API_KEY'; // Replace with your Giphy key
+    try {
+        const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}&tag=${tag}&rating=pg-13`);
+        const data = await response.json();
+        if(data.data && data.data.images && data.data.images.original){
+            return data.data.images.original.url;
         }
+    } catch(e){console.log('GIF fetch failed', e);}
+    return 'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif';
+}
+
+async function renderPage() {
+    const hash = location.hash.substring(1); 
+    const container = document.getElementById('container');
+    container.innerHTML = '';
+
+    if(!hash){ 
+        // MAIN PAGE - fixed content
+        container.innerHTML = `
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-bounce text-center text-yellow-400">SLASK PINBALL MADNESS</h1>
+            <p class="text-2xl md:text-3xl mb-6 text-center animate-pulse">WHERE FLAILING IS THE ONLY WAY TO PLAY! CONTROL? WHAT'S THAT? 😂🤪</p>
+            <a href="#type0" class="bg-purple-600 text-white px-6 py-3 rounded-full font-bold hover:bg-pink-500 transition block mx-auto animate-pulse">DIVE INTO THE CHAOS</a>
+        `;
+        document.body.className = 'bg-black text-white flex items-center justify-center min-h-screen';
+        return;
     }
 
-    async function loadGifs() {
-        for (let i = 0; i < GIF_IDS.length; i++) {
-            const gifId = GIF_IDS[i];
-            const tag = GIF_TAGS[i % GIF_TAGS.length];
-            const imgElement = document.getElementById(gifId);
-            if (imgElement) {
-                const gifUrl = await fetchRandomGif(tag);
-                imgElement.src = gifUrl;
-            }
-        }
-    }
+    // OTHER PAGES - infinite chaos
+    const colors = ['bg-red-900','bg-purple-900','bg-black','bg-green-900','bg-blue-900','bg-pink-900'];
+    const bgClass = colors[Math.floor(Math.random()*colors.length)];
+    document.body.className = `${bgClass} text-white flex items-center justify-center min-h-screen transition-colors duration-700`;
 
-    document.addEventListener('DOMContentLoaded', loadGifs);
-    setInterval(loadGifs, 10000);
+    // Random blinking/flailing text
+    const p = document.createElement('p');
+    p.textContent = getRandomText(hash) + " " + "⚡💥🔥🤪";
+    p.className = "text-2xl md:text-4xl mb-6 text-center text-yellow-400 animate-pulse";
+    container.appendChild(p);
+
+    // Random GIF
+    const gif = document.createElement('img');
+    const tag = gifTags[Math.floor(Math.random()*gifTags.length)];
+    gif.src = await fetchRandomGif(tag);
+    gif.className = "mx-auto rounded shadow-lg mb-6 max-w-full animate-bounce";
+    container.appendChild(gif);
+
+    // Next button with random emoji
+    const emojis = ['🤪','💀','🔥','🚀','😎','💥','🤯','😂','😈'];
+    const btn = document.createElement('a');
+    btn.textContent = "FLAIL TO NEXT LEVEL! " + emojis[Math.floor(Math.random()*emojis.length)];
+    btn.href = '#' + getNextType(hash);
+    btn.className = "bg-purple-600 text-white px-6 py-3 rounded-full font-bold hover:bg-pink-500 transition block mx-auto animate-bounce";
+    container.appendChild(btn);
+}
+
+window.addEventListener('hashchange', renderPage);
+document.addEventListener('DOMContentLoaded', renderPage);
 </script>
-
+</head>
+<body>
+    <div id="container" class="text-center px-4"></div>
 </body>
 </html>
